@@ -30,11 +30,11 @@ Reusing an exercise that you already know will help you understand the fundament
 - Try to figure out what your component hierarchy should be before starting to code
 - You should aim to keep your state closest to the components that use it. Avoid whenever you can passing down pieces of state
 
-## Extra Challenge 1
+## Extension 1
 
 - Add filters to the store ie. filter by item type; when a user clicks a filter they will only see items of that type
 - Add sorting to the store ie. sort by price or sort alphabetically; when a user clicks sort they will see a sorted list of items
 
-## Extra Challenge 2
+## Extension 2
 
 - Add a new detail component for each of the items, and render it conditionally after clicking on an item
