@@ -2,6 +2,8 @@
 
 You're going to recreate the [javascript greengrocers exercise](./images/greengrocer-exercise.gif) from scratch. But this time, using React!
 
+![](images/greengrocer-exercise.gif)
+
 Reusing an exercise that you already know will help you understand the fundamentals of React.
 
 ## Setup
