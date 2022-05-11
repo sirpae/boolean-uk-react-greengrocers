@@ -29,8 +29,8 @@ Reusing an exercise that you already know will help you understand the fundament
 
 ## Tips
 
-- Try to figure out what your component hierarchy should be before starting to code
-- You should aim to keep your state closest to the components that use it. Avoid whenever you can passing down pieces of state
+- Create a diagram of your component hierarchy before starting to code
+- Annotate your diagram by adding what state each component needs to manage - React State or React Props
 
 ## Extension 1
 
