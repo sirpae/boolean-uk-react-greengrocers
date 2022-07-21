@@ -2,36 +2,74 @@ import './styles/reset.css'
 import './styles/index.css'
 
 import initialStoreItems from './store-items'
-
-/*
-Here's what a store item should look like
-{
-  id: '001-beetroot',
-  name: 'beetroot',
-  price: 0.35
-}
-
-What should a cart item look like? 🤔
-*/
-
-console.log(initialStoreItems)
+import StoreItem from './components/storeItem'
+import CartItem from './components/cartItem'
+import { useState} from 'react'
 
 export default function App() {
-  // Setup state here...
+  const [storeItems] = useState(initialStoreItems)
+  const [cart, setCart] = useState([])
+
+  const getTotal = () => cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)
+
+  const addItemToCart = (item) => {
+    const newCart = [...cart]
+    const itemIndex = newCart.findIndex(i => i.id === item.id)
+
+    if (itemIndex !== -1) {
+      newCart[itemIndex].quantity++
+    } else {
+      newCart.push({
+        ...item,
+        quantity: 1
+      })
+    }
+
+    setCart(newCart)
+  }
+
+  const removeItemFromCart = (item) => {
+    const newCart = [...cart]
+    const itemIndex = newCart.findIndex(i => i.id === item.id)
+
+    if (itemIndex !== -1) {
+      newCart[itemIndex].quantity--
+      if (newCart[itemIndex].quantity === 0) {
+        newCart.splice(itemIndex, 1)
+      }
+    }
+
+    setCart(newCart)
+  }
 
   return (
     <>
       <header id="store">
         <h1>Greengrocers</h1>
         <ul className="item-list store--item-list">
-          {/* Wrtite some code here... */}
+          {
+            storeItems.map(item => 
+              <StoreItem
+                key={item.id}
+                item={item}
+                addItemToCart={addItemToCart}
+              />
+          )}
         </ul>
       </header>
       <main id="cart">
         <h2>Your Cart</h2>
         <div className="cart--item-list-container">
           <ul className="item-list cart--item-list">
-            {/* Wrtite some code here... */}
+            {
+              cart.map(item => 
+                <CartItem
+                  key={item.id}
+                  item={item}
+                  addItemToCart={addItemToCart}
+                  removeItemFromCart={removeItemFromCart}
+                  />
+            )}
           </ul>
         </div>
         <div className="total-section">
@@ -39,7 +77,9 @@ export default function App() {
             <h3>Total</h3>
           </div>
           <div>
-            <span className="total-number">£0.00</span>
+            <span className="total-number">
+              ${getTotal()}
+            </span>
           </div>
         </div>
       </main>
